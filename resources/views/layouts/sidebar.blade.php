@@ -1,129 +1,139 @@
-<nav class="pcoded-navbar" pcoded-header-position="relative">
+<nav class="pcoded-navbar">
     <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
     <div class="pcoded-inner-navbar main-menu">
         <div class="">
             <div class="main-menu-header">
-                <img class="img-40" src="{{asset('template-dashboard/default')}}/assets/images/user.png" alt="User-Profile-Image">
+                <img class="img-80 img-radius" src="{{ asset('admin-templates')}}/images/avatar-4.jpg" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span>Master</span>
-                    <span id="more-details">Administrator<i class="ti-angle-down"></i></span>
+                    <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
                 </div>
             </div>
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
                         <a href="user-profile.html"><i class="ti-user"></i>Profil</a>
-                        <a href="#!"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" menu-title-theme="theme5">Dashboard</div>
+        <div class="pcoded-navigation-label">DASHBOARD</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="active">
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-home"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext">Dashboard</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
         </ul>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" menu-title-theme="theme5">Administrator</div>
+        <div class="pcoded-navigation-label">ADMINISTRATOR</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu">
-                <a href="javascript:void(0)">
-                    <span class="pcoded-micon"><i class="ti-user"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Manajemen User</span>
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-user"></i><b>BC</b></span>
+                    <span class="pcoded-mtext">Manajemen User</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Data User</span>
+                            <span class="pcoded-mtext">Data User</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Data Role</span>
+                            <span class="pcoded-mtext">Roles</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Data Permission</span>
+                            <span class="pcoded-mtext">Permissions</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-car"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-car"></i><b>D</b></span>
                     <span class="pcoded-mtext">Manajemen Mobil</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li class="pcoded-hasmenu">
-                <a href="javascript:void(0)">
-                    <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Manajemen Penyewaan</span>
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>BC</b></span>
+                    <span class="pcoded-mtext">Manajemen Sewa</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Penyewaan Baru</span>
+                            <span class="pcoded-mtext">Penyewaan Baru</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Pembayaran</span>
+                            <span class="pcoded-mtext">Pembayaran</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="index-2.html">
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.default">Penyewaan Aktif</span>
+                            <span class="pcoded-mtext">Penyewaan Aktif</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="breadcrumb.html" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext">Riwayat Penyewaan</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                 </ul>
             </li>
-
             <li>
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-printer"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-printer"></i><b>D</b></span>
                     <span class="pcoded-mtext">Laporan</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
         </ul>
-        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" menu-title-theme="theme5">User</div>
+        <div class="pcoded-navigation-label">USER</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-car"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-car"></i><b>D</b></span>
                     <span class="pcoded-mtext">Mobil</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-shopping-cart"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-shopping-cart"></i><b>D</b></span>
                     <span class="pcoded-mtext">Penyewaan</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard.index')}}" data-i18n="nav.widget.main">
-                    <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i></span>
+                <a href="index.html" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-world"></i><b>D</b></span>
                     <span class="pcoded-mtext">Riwayat Penyewaan</span>
+                    <span class="pcoded-mcaret"></span>
                 </a>
             </li>
         </ul>
-
     </div>
 </nav>

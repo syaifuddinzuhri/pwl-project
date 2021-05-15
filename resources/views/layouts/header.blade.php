@@ -2,41 +2,87 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
-
+    <title> @yield('title') - Premium RentCar</title>
+    <!-- Meta -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Phoenixcoded">
-    <meta name="keywords" content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-    <meta name="author" content="Phoenixcoded">
-
-    <link rel="icon" href="{{ asset('template-dashboard/default') }}/assets/images/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    {{-- Bootstrap --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard')}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    {{-- Icon --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/icon/themify-icons/themify-icons.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/icon/icofont/css/icofont.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/pages/flag-icon/flag-icon.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/linearicons.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/simple-line-icons.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/ionicons.css">
-    {{-- Menu Search --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/pages/menu-search/css/component.css">
-    {{-- Chart --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/pages/dashboard/amchart/css/amchart.css">
-    {{-- Dashboard Style --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/pages/dashboard/horizontal-timeline/css/style.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/color/color-1.css" id="color" />
-    {{-- Scrollbar --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('template-dashboard/default') }}/assets/css/jquery.mCustomScrollbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="Codedthemes" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{ asset('admin-templates')}}/images/favicon.png" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="{{ asset('admin-templates')}}/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/bootstrap/css/bootstrap.min.css">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="{{ asset('admin-templates')}}/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify icon -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/icon/themify-icons/themify-icons.css">
+    <!-- font-awesome-n -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/font-awesome-n.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/font-awesome.min.css">
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/jquery.mCustomScrollbar.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/style.css">
+    @yield('pageCSS')
 </head>
-<body>
 
+<body>
+    <!-- Pre-loader start -->
     <div class="theme-loader">
-        <div class="ball-scale">
-            <div></div>
+        <div class="loader-track">
+            <div class="preloader-wrapper">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- Pre-loader end -->
