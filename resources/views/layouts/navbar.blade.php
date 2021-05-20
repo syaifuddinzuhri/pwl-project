@@ -4,7 +4,7 @@
             <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                 <i class="ti-menu"></i>
             </a>
-            <a href="index.html">
+            <a href="{{route('dashboard.index')}}">
                 <img class="img-fluid" width="180" src="{{ asset('admin-templates')}}/images/logo.png" alt="Theme-Logo" />
             </a>
             <a class="mobile-options waves-effect waves-light">

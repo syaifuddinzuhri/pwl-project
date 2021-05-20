@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/login', [DashboardController::class, 'login'])->name('dashboard.login');
-Route::get('/register', [DashboardController::class, 'register'])->name('dashboard.register');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+
+Route::resource('user', UserController::class);
+Route::resource('role', RoleController::class);
+Route::resource('permission', PermissionController::class);

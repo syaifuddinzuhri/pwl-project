@@ -14,4 +14,6 @@
     </div>
 </div>
 
+@yield('pageModal')
+
 @include('layouts.footer')

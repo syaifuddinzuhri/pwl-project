@@ -120,7 +120,7 @@
                                 <hr />
                                 <div class="row">
                                     <div class="col text-center">
-                                        <p class="m-0">Belum punya akun?<a href="{{ route('dashboard.register')}}"> Daftar Disini!</a></p>
+                                        <p class="m-0">Belum punya akun?<a href="{{ route('auth.register')}}"> Daftar Disini!</a></p>
                                     </div>
                                 </div>
                             </div>

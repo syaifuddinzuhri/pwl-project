@@ -91,7 +91,8 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
 
-                    <form class="md-float-material form-material">
+                    <form class="md-float-material form-material" action="{{ route('auth.register')}}" method="POST">
+                        @csrf
                         <div class="text-center">
                             <img src="{{ asset('admin-templates')}}/images/logo.png" width="280" alt="logo.png">
                         </div>
@@ -102,35 +103,57 @@
                                         <h3 class="text-center txt-primary">Registrasi</h3>
                                     </div>
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="user-name" class="form-control">
+                                <div class="form-group form-default @error('name') form-danger @enderror form-static-label">
+                                    <input type="text" name="name" class="form-control" placeholder="Masukkan nama lengkap" value="{{ old('name')}}">
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Masukkan username</label>
+                                    @error('name')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="email" class="form-control">
+                                <div class="form-group form-default @error('email') form-danger @enderror form-static-label">
+                                    <input type="email" name="email" class="form-control" placeholder="Masukkan email" value="{{ old('email')}}">
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Masukkan email</label>
+                                    @error('email')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="password" name="password" class="form-control">
+                                <div class="form-group form-default @error('phone') form-danger @enderror form-static-label">
+                                    <input type="text" name="phone" class="form-control" placeholder="Masukkan nomor hp" value="{{ old('phone')}}">
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Masukkan password</label>
+                                    @error('phone')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="password" name="confirm-password" class="form-control">
+                                <div class="form-group form-default @error('address') form-danger @enderror form-static-label">
+                                    <textarea type="text" name="address" class="form-control" placeholder="Masukkan alamat"></textarea>
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Masukkan konfirmasi password</label>
+                                    @error('address')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-default @error('password') form-danger @enderror form-static-label">
+                                    <input type="password" name="password" class="form-control" placeholder="Masukkan password">
+                                    <span class="form-bar"></span>
+                                    @error('password')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-default @error('password_confirmation') form-danger @enderror form-static-label">
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Masukkan konfirmasi password">
+                                    <span class="form-bar"></span>
+                                    @error('password_confirmation')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
                                     </div>
                                 </div>
                                 <hr />
                                 <div class="row">
                                     <div class="col text-center">
-                                        <p class="m-0">Sudah punya akun?<a href="{{ route('dashboard.login')}}"> Login Disini!</a></p>
+                                        <p class="m-0">Sudah punya akun?<a href="{{ route('auth.showLogin')}}"> Login Disini!</a></p>
                                     </div>
                                 </div>
                             </div>

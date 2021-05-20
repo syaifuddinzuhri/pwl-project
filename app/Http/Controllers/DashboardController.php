@@ -6,16 +6,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
     public function index()
     {
+        // toast('Your Post as been submited!', 'success');
         return view('dashboard');
-    }
-    public function login()
-    {
-        return view('login');
-    }
-    public function register()
-    {
-        return view('register');
     }
 }

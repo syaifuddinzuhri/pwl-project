@@ -1,3 +1,5 @@
+@include('sweetalert::alert')
+
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('admin-templates') }}/js/jquery/jquery.min.js "></script>
 <script type="text/javascript" src="{{ asset('admin-templates') }}/js/jquery-ui/jquery-ui.min.js "></script>
@@ -14,8 +16,13 @@
 <!-- menu js -->
 <script src="{{ asset('admin-templates') }}/js/pcoded.min.js"></script>
 <script src="{{ asset('admin-templates') }}/js/vertical/vertical-layout.min.js "></script>
-
+{{-- Toast --}}
+<script src="{{ asset('admin-templates') }}/plugins/toastr/dist/jquery.toast.min.js"></script>
 <script type="text/javascript" src="{{ asset('admin-templates') }}/js/script.js "></script>
+<script type="text/javascript">
+    var APP_URL = "{!!  url('/') !!}";
+
+</script>
 
 @yield('pageScript')
 </body>

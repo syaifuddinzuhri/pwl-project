@@ -19,8 +19,8 @@
         </div>
         <div class="pcoded-navigation-label">DASHBOARD</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="active">
-                <a href="index.html" class="waves-effect waves-dark">
+            <li class="{{ Request::segment(1) === null ? 'active' : null }} ">
+                <a href="{{route('dashboard.index')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext">Dashboard</span>
                     <span class="pcoded-mcaret"></span>
@@ -29,29 +29,29 @@
         </ul>
         <div class="pcoded-navigation-label">ADMINISTRATOR</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu">
+            <li class="pcoded-hasmenu {{ Request::segment(1) === 'user' || Request::segment(1) === 'role' || Request::segment(1) === 'permission' ? 'active pcoded-trigger' : null }}">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-user"></i><b>BC</b></span>
                     <span class="pcoded-mtext">Manajemen User</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li>
-                        <a href="breadcrumb.html" class="waves-effect waves-dark">
+                    <li class="{{ Request::segment(1) === 'user' ? 'active' : null }}">
+                        <a href="{{ route('user.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Data User</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li>
-                        <a href="breadcrumb.html" class="waves-effect waves-dark">
+                    <li class="{{ Request::segment(1) === 'role' ? 'active' : null }}">
+                        <a href="{{ route('role.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Roles</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li>
-                        <a href="breadcrumb.html" class="waves-effect waves-dark">
+                    <li class="{{ Request::segment(1) === 'permission' ? 'active' : null }}">
+                        <a href="{{ route('permission.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Permissions</span>
                             <span class="pcoded-mcaret"></span>

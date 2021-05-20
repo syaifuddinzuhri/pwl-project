@@ -7,8 +7,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-    <meta name="author" content="Codedthemes" />
+    <meta name="author" content="Syaifuddin Zuhri" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('admin-templates')}}/images/favicon.png" type="image/x-icon">
     <!-- Google font-->
@@ -26,8 +27,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/font-awesome.min.css">
     <!-- scrollbar.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/jquery.mCustomScrollbar.css">
+    <!-- Toast -->
+    <link rel="stylesheet" href="{{ asset('admin-templates') }}/plugins/toastr/dist/jquery.toast.min.css" />
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-templates')}}/css/style.css">
+    <style>
+        .btn-loading {
+            display: none;
+        }
+
+    </style>
     @yield('pageCSS')
 </head>
 
