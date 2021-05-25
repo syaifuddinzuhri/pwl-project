@@ -15,4 +15,9 @@ class Menu extends Model
         'icon',
         'permission_id'
     ];
+
+    public function submenu()
+    {
+        return $this->hasMany(SubMenu::class);
+    }
 }
