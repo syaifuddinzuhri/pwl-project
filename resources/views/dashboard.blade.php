@@ -57,7 +57,22 @@
                                             <i class="ti-car text-c-purple f-24"></i>
                                         </div>
                                         <div class="col-8 p-l-0">
-                                            <h5>500</h5>
+                                            <h5>{{$car_types}}</h5>
+                                            <p class="text-muted m-b-0">Tipe Mobil</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center text-center">
+                                        <div class="col-4 p-r-0">
+                                            <i class="ti-car text-c-purple f-24"></i>
+                                        </div>
+                                        <div class="col-8 p-l-0">
+                                            <h5>{{$cars}}</h5>
                                             <p class="text-muted m-b-0">Mobil</p>
                                         </div>
                                     </div>

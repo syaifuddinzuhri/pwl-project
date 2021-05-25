@@ -3,43 +3,40 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-function uploadFoto($nama, $upload)
+function uploadFile($file, $folder)
 {
-    $foto = $nama;
-    $ext = $foto->getClientOriginalExtension();
-    if ($nama->isValid()) {
-        $foto_name = date('YmdHis') . ".$ext";
-        $upload_path = $upload;
-        $nama->move($upload_path, $foto_name);
-        return $foto_name;
+    $ext = $file->getClientOriginalExtension();
+    if ($file->isValid()) {
+        $file_name = $folder . '_' . date('YmdHis') . ".$ext";
+        $file->storeAs($folder, $file_name, 'public');
+        return $file_name;
     }
     return false;
 }
 
-function updateFoto($data, $namaFile, $input, $upload)
+function updateFile($data, $path, $file, $folder)
 {
-    $exist = Storage::disk($namaFile)->exists($data);
+    $exist = file_exists(storage_path('app/public/' . $path . '/' . $data));
     if (isset($data) && $exist) {
-        $delete = Storage::disk($namaFile)->delete($data);
+        Storage::delete('public/' . $path . '/' . $data);
     }
-    $foto = $input;
-    $ext = $foto->getClientOriginalExtension();
-    if ($input->isValid()) {
-        $foto_name = date('YmdHis') . ".$ext";
-        $upload_path = $upload;
-        $input->move($upload_path, $foto_name);
-        return $foto_name;
+    $ext = $file->getClientOriginalExtension();
+    if ($file->isValid()) {
+        $file_name = $folder . '_' . date('YmdHis') . ".$ext";
+        $file->storeAs($folder, $file_name, 'public');
+        return $file_name;
     }
     return false;
 }
 
-function deleteFoto($data, $namafile)
+function deleteFile($data, $path)
 {
-    $exist = Storage::disk($namafile)->exists($data);
+    $exist = file_exists(storage_path('app/public/' . $path . '/' . $data));
     if (isset($data) && $exist) {
-        $delete = Storage::disk($namafile)->delete($data);
+        Storage::delete('public/' . $path . '/' . $data);
     }
 }
 
@@ -73,4 +70,14 @@ function rupiah($angka)
 
     $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
     return $hasil_rupiah;
+}
+
+function dateDiffInDays($date1, $date2)
+{
+    // Calculating the difference in timestamps
+    $diff = strtotime($date2) - strtotime($date1);
+
+    // 1 day = 24 hours
+    // 24 * 60 * 60 = 86400 seconds
+    return abs(round($diff / 86400));
 }

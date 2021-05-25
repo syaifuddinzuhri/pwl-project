@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\CarTypeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -27,3 +29,5 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::resource('user', UserController::class);
 Route::resource('role', RoleController::class);
 Route::resource('permission', PermissionController::class);
+Route::resource('car', CarController::class);
+Route::resource('car-type', CarTypeController::class);

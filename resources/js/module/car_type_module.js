@@ -1,14 +1,14 @@
 import { handle } from "./handle_module";
-class Permission {
+class CarType {
     dataTable() {
         handle.setup();
-        $("#table-permissions").DataTable({
+        $("#table-car-types").DataTable({
             responsive: true,
             autoWidth: false,
             processing: true,
             serverSide: true,
             ajax: {
-                url: APP_URL + "/permission",
+                url: APP_URL + "/car-type",
             },
             columns: [
                 {
@@ -32,8 +32,8 @@ class Permission {
         });
     }
 
-    addPermission() {
-        $("#form-add-permission").on("submit", function (e) {
+    addCarType() {
+        $("#form-add-car-type").on("submit", function (e) {
             e.preventDefault()
             var data = {
                 name: $("#name").val(),
@@ -41,52 +41,52 @@ class Permission {
             };
             $.ajax({
                 type: "POST",
-                url: `${APP_URL}/permission`,
+                url: `${APP_URL}/car-type`,
                 data: data,
                 beforeSend: function () {
-                    handle.spinner('#form-add-permission .btn-submit', 'hide')
-                    handle.spinner('#form-add-permission .btn-loading', 'show')
+                    handle.spinner('#form-add-car-type .btn-submit', 'hide')
+                    handle.spinner('#form-add-car-type .btn-loading', 'show')
                 },
                 success: function (res) {
                     if (res) {
-                        handle.spinner('#form-add-permission .btn-loading', 'hide')
-                        handle.spinner('#form-add-permission .btn-submit', 'show')
-                        $("#table-permissions").DataTable().ajax.reload();
-                        $("#form-add-permission")[0].reset();
+                        handle.spinner('#form-add-car-type .btn-loading', 'hide')
+                        handle.spinner('#form-add-car-type .btn-submit', 'show')
+                        $("#table-car-types").DataTable().ajax.reload();
+                        $("#form-add-car-type")[0].reset();
                         handle.toastSuccess(res.messages)
                     }
                 },
                 error: (e, x, settings, exception) => {
-                    handle.spinner('#form-add-permission .btn-loading', 'hide')
-                    handle.spinner('#form-add-permission .btn-submit', 'show')
+                    handle.spinner('#form-add-car-type .btn-loading', 'hide')
+                    handle.spinner('#form-add-car-type .btn-submit', 'show')
                     handle.errorhandle(e, x, settings, exception);
                 },
             });
         })
     }
 
-    editPermission() {
+    editCarType() {
         handle.setup();
         var id = "";
 
-        $("#table-permissions").on("click", ".btn-edit-permission", function () {
+        $("#table-car-types").on("click", ".btn-edit-car-type", function () {
             id = $(this).data('id');
             $.ajax({
                 type: "GET",
-                url: `${APP_URL}/permission/${id}/edit`,
+                url: `${APP_URL}/car-type/${id}/edit`,
                 beforeSend: function () {
-                    handle.spinner('#body-edit-permission', 'hide')
+                    handle.spinner('#body-edit-car-type', 'hide')
                     handle.spinner('#loading', 'show')
                 },
                 success: function (res) {
                     handle.spinner('#loading', 'hide')
-                    handle.spinner('#body-edit-permission', 'show')
+                    handle.spinner('#body-edit-car-type', 'show')
                     $('#name-edit').val(res.data.name);
                 },
             });
         });
 
-        $("#form-edit-permission").on("submit", function (e) {
+        $("#form-edit-car-type").on("submit", function (e) {
             e.preventDefault()
             var data = {
                 name: $("#name-edit").val(),
@@ -94,60 +94,60 @@ class Permission {
             };
             $.ajax({
                 type: "PUT",
-                url: APP_URL + "/permission/" + id,
+                url: APP_URL + "/car-type/" + id,
                 data: data,
                 beforeSend: function () {
-                    handle.spinner('#editPermissionModal .btn-submit', 'hide')
-                    handle.spinner('#editPermissionModal .btn-loading', 'show')
+                    handle.spinner('#editCarTypeModal .btn-submit', 'hide')
+                    handle.spinner('#editCarTypeModal .btn-loading', 'show')
                 },
                 success: function (res) {
                     if (res) {
-                        handle.spinner('#editPermissionModal .btn-loading', 'hide')
-                        handle.spinner('#editPermissionModal .btn-submit', 'show')
-                        $("#table-permissions").DataTable().ajax.reload();
-                        $("#form-edit-permission")[0].reset();
-                        $("#editPermissionModal").modal("hide")
+                        handle.spinner('#editCarTypeModal .btn-loading', 'hide')
+                        handle.spinner('#editCarTypeModal .btn-submit', 'show')
+                        $("#table-car-types").DataTable().ajax.reload();
+                        $("#form-edit-car-type")[0].reset();
+                        $("#editCarTypeModal").modal("hide")
                         handle.toastSuccess(res.messages)
                     }
                 },
                 error: (e, x, settings, exception) => {
-                    handle.spinner('#editPermissionModal .btn-loading', 'hide')
-                    handle.spinner('#editPermissionModal .btn-submit', 'show')
+                    handle.spinner('#editCarTypeModal .btn-loading', 'hide')
+                    handle.spinner('#editCarTypeModal .btn-submit', 'show')
                     handle.errorhandle(e, x, settings, exception);
                 },
             });
         })
     }
 
-    deletePermission() {
+    deleteCarType() {
         handle.setup();
         let id = '';
-        $("#table-permissions").on("click", ".btn-delete-permission", function () {
+        $("#table-car-types").on("click", ".btn-delete-car-type", function () {
             id = $(this).data('id');
         });
-        $("#form-delete-permission").on("submit", function (e) {
-            var url = APP_URL + "/permission/" + id
+        $("#form-delete-car-type").on("submit", function (e) {
+            var url = APP_URL + "/car-type/" + id
             var form = $(this);
             $.ajax({
                 url: url,
                 type: "DELETE",
                 data: form.serialize(),
                 beforeSend: function () {
-                    handle.spinner('#form-delete-permission .btn-submit', 'hide')
-                    handle.spinner('#form-delete-permission .btn-loading', 'show')
+                    handle.spinner('#form-delete-car-type .btn-submit', 'hide')
+                    handle.spinner('#form-delete-car-type .btn-loading', 'show')
                 },
                 success: function (res) {
                     if (res) {
-                        handle.spinner('#form-delete-permission .btn-loading', 'hide')
-                        handle.spinner('#form-delete-permission .btn-submit', 'show')
-                        $("#table-permissions").DataTable().ajax.reload();
-                        $("#deletePermissionModal").modal("hide");
+                        handle.spinner('#form-delete-car-type .btn-loading', 'hide')
+                        handle.spinner('#form-delete-car-type .btn-submit', 'show')
+                        $("#table-car-types").DataTable().ajax.reload();
+                        $("#deleteCarTypeModal").modal("hide");
                         handle.toastSuccess(res.messages)
                     }
                 },
                 error: (e, x, settings, exception) => {
-                    handle.spinner('#form-delete-permission .btn-loading', 'hide')
-                    handle.spinner('#form-delete-permission .btn-submit', 'show')
+                    handle.spinner('#form-delete-car-type .btn-loading', 'hide')
+                    handle.spinner('#form-delete-car-type .btn-submit', 'show')
                     var msg = "Hapus data gagal ";
                     handle.errorhandle(e, x, settings, exception, msg);
                 },
@@ -158,4 +158,4 @@ class Permission {
 
 }
 
-export const permission = new Permission();
+export const carType = new CarType();

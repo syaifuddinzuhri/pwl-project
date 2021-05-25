@@ -189,7 +189,6 @@ var Permission = /*#__PURE__*/function () {
           name: $("#name").val(),
           _token: _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.token()
         };
-        console.log(data);
         $.ajax({
           type: "POST",
           url: "".concat(APP_URL, "/permission"),

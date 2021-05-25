@@ -37,7 +37,7 @@
                             <div class="media">
                                 <img class="d-flex align-self-center img-radius" src="{{ asset('admin-templates')}}/images/avatar-2.jpg" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="notification-user">John Doe</h5>
+                                    <h5 class="notification-user">Master</h5>
                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                     <span class="notification-time">30 minutes ago</span>
                                 </div>
@@ -68,7 +68,7 @@
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <img src="{{ asset('admin-templates')}}/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                        <span>John Doe</span>
+                        <span>Master</span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
