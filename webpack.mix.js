@@ -20,4 +20,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/permission.js', 'public/js')
 // mix.js('resources/js/role.js', 'public/js')
 mix.js('resources/js/car.js', 'public/js')
+mix.js('resources/js/menu.js', 'public/js')
 mix.js('resources/js/car_type.js', 'public/js')
