@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
@@ -29,17 +30,20 @@ class UserController extends Controller
             $data = User::with('roles')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->editColumn('gender', function ($data) {
+                    return $data->gender == "lk" ? 'Laki-laki' : 'Perempuan';
+                })
                 ->editColumn('role', function ($data) {
                     return '<span class="badge badge-dark mr-2 py-1 px-2">' . $data->roles->pluck('name')[0] . '</span>';
                 })
                 ->addColumn('action', function ($data) {
                     $button = '<div class="btn-group" role="group">';
-                    $button .= '<a href="javascript:void(0)" class="btn btn-sm btn-info btn-edit-user" data-toggle="modal" data-id="' . $data->id . '" data-target="#editUserModal">Edit</a>';
+                    $button .= '<a href="/user/' . $data->id . '/edit" class="btn btn-sm btn-info">Edit</a>';
                     $button .= '<a href="javascript:void(0)" data-toggle="modal" data-id="' . $data->id . '" data-target="#deleteUserModal" class="btn btn-sm btn-danger btn-delete-user">Hapus</a>';
                     $button .= '</div>';
                     return $button;
                 })
-                ->rawColumns(['action', 'role'])
+                ->rawColumns(['action', 'role', 'gender'])
                 ->make(true);
         }
         $roles = Role::all();
@@ -62,14 +66,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $data = $request->only(['name', 'email', 'address', 'phone']);
+        $data = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender']);
         $password = Hash::make($request->password);
         $payload = array_merge($data, ['password' => $password]);
         $user = $this->model->create($payload);
         $user->assignRole($request->role);
-        return response()->json(['success' => true, 'data' => $user, 'messages' => 'Data berhasil disimpan'], 201);
+        return redirect()->back();
     }
 
     /**
@@ -93,8 +97,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $user = User::with('roles')->findOrFail($id);
-        $payload = ['roles' => $roles, ['user' => $user]];
-        return response()->json(['success' => true, 'data' => $payload], 200);
+        return view('user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -106,11 +109,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->only(['name', 'email', 'address', 'phone']);
+        $data = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender']);
         $this->model->update($data, $id);
         $user = $this->model->show($id);
         $user->syncRoles($request->role);
-        return response()->json(['success' => true, 'data' => $user, 'messages' => 'Data berhasil diupdate'], 200);
+        return redirect()->route('user.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**

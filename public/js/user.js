@@ -187,8 +187,14 @@ var User = /*#__PURE__*/function () {
           data: "name",
           name: "name"
         }, {
+          data: "no_ktp",
+          name: "no_ktp"
+        }, {
           data: "email",
           name: "email"
+        }, {
+          data: "gender",
+          name: "gender"
         }, {
           data: "phone",
           name: "phone"
@@ -216,6 +222,12 @@ var User = /*#__PURE__*/function () {
           name: {
             required: true
           },
+          no_ktp: {
+            required: true
+          },
+          gender: {
+            required: true
+          },
           email: {
             required: true,
             email: true
@@ -241,6 +253,12 @@ var User = /*#__PURE__*/function () {
         messages: {
           name: {
             required: "Nama tidak boleh kosong"
+          },
+          gender: {
+            required: "Jenis kelamin tidak boleh kosong"
+          },
+          no_ktp: {
+            required: "Nomor KTP tidak boleh kosong"
           },
           email: {
             required: "Email tidak boleh kosong",
@@ -283,9 +301,10 @@ var User = /*#__PURE__*/function () {
             address: $('#address').val(),
             password: $('#password').val(),
             role: $('#role').val(),
+            no_ktp: $('#no_ktp').val(),
+            gender: $('#gender').val(),
             _token: _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.token()
           };
-          console.log(data);
 
           if (_handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.checkEmail(data["email"])) {
             $.ajax({
@@ -359,6 +378,12 @@ var User = /*#__PURE__*/function () {
           name: {
             required: true
           },
+          no_ktp: {
+            required: true
+          },
+          gender: {
+            required: true
+          },
           email: {
             required: true,
             email: true
@@ -385,6 +410,12 @@ var User = /*#__PURE__*/function () {
           name: {
             required: "Nama tidak boleh kosong"
           },
+          gender: {
+            required: "Jenis kelamin tidak boleh kosong"
+          },
+          no_ktp: {
+            required: "Nomor KTP tidak boleh kosong"
+          },
           email: {
             required: "Email tidak boleh kosong",
             email: 'Email tidak valid'
@@ -394,6 +425,14 @@ var User = /*#__PURE__*/function () {
           },
           address: {
             required: "Alamat tidak boleh kosong"
+          },
+          password: {
+            required: "Password tidak boleh kosong",
+            minlength: "Password minimal 8 karakter"
+          },
+          password_confirmation: {
+            required: "Konfirmasi password tidak boleh kosong",
+            equalTo: "Password tidak sama"
           },
           role: {
             required: "Role tidak boleh kosong"
@@ -416,10 +455,12 @@ var User = /*#__PURE__*/function () {
             email: $('#email_edit').val(),
             phone: $('#phone_edit').val(),
             address: $('#address_edit').val(),
+            password: $('#password_edit').val(),
             role: $('#role_edit').val(),
+            no_ktp: $('#no_ktp_edit').val(),
+            gender: $('#gender_edit').val(),
             _token: _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.token()
           };
-          console.log(data);
 
           if (_handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.checkEmail(data["email"])) {
             $.ajax({
@@ -571,10 +612,10 @@ $(document).ready(function () {
   var splitURL = pathURL.split("/");
 
   if (pathURL == "/user" || pathURL == "/user/*") {
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.dataTable();
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.storeUser();
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.deleteUser();
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.editUser();
+    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.dataTable(); // user.storeUser();
+
+    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.deleteUser(); // user.editUser();
+
     $('.users .reload-table').on('click', function () {
       $("#table-users").DataTable().ajax.reload();
     });

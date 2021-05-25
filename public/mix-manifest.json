@@ -1,5 +1,3 @@
 {
-    "/js/user.js": "/js/user.js",
-    "/js/permission.js": "/js/permission.js",
-    "/js/role.js": "/js/role.js"
+    "/js/user.js": "/js/user.js"
 }

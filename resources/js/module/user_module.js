@@ -37,8 +37,16 @@ class User {
                     name: "name",
                 },
                 {
+                    data: "no_ktp",
+                    name: "no_ktp",
+                },
+                {
                     data: "email",
                     name: "email",
+                },
+                {
+                    data: "gender",
+                    name: "gender",
                 },
                 {
                     data: "phone",
@@ -68,6 +76,8 @@ class User {
         $("#form-add-user").validate({
             rules: {
                 name: { required: true },
+                no_ktp: { required: true },
+                gender: { required: true },
                 email: { required: true, email: true },
                 phone: { required: true },
                 address: { required: true },
@@ -77,6 +87,8 @@ class User {
             },
             messages: {
                 name: { required: "Nama tidak boleh kosong" },
+                gender: { required: "Jenis kelamin tidak boleh kosong" },
+                no_ktp: { required: "Nomor KTP tidak boleh kosong" },
                 email: { required: "Email tidak boleh kosong", email: 'Email tidak valid' },
                 phone: { required: "Nomor HP tidak boleh kosong" },
                 address: { required: "Alamat tidak boleh kosong" },
@@ -103,10 +115,10 @@ class User {
                     address: $('#address').val(),
                     password: $('#password').val(),
                     role: $('#role').val(),
+                    no_ktp: $('#no_ktp').val(),
+                    gender: $('#gender').val(),
                     _token: handle.token()
                 }
-
-                console.log(data)
 
                 if (handle.checkEmail(data["email"])) {
                     $.ajax({
@@ -180,6 +192,8 @@ class User {
         $("#form-edit-user").validate({
             rules: {
                 name: { required: true },
+                no_ktp: { required: true },
+                gender: { required: true },
                 email: { required: true, email: true },
                 phone: { required: true },
                 address: { required: true },
@@ -189,9 +203,13 @@ class User {
             },
             messages: {
                 name: { required: "Nama tidak boleh kosong" },
+                gender: { required: "Jenis kelamin tidak boleh kosong" },
+                no_ktp: { required: "Nomor KTP tidak boleh kosong" },
                 email: { required: "Email tidak boleh kosong", email: 'Email tidak valid' },
                 phone: { required: "Nomor HP tidak boleh kosong" },
                 address: { required: "Alamat tidak boleh kosong" },
+                password: { required: "Password tidak boleh kosong", minlength: "Password minimal 8 karakter" },
+                password_confirmation: { required: "Konfirmasi password tidak boleh kosong", equalTo: "Password tidak sama" },
                 role: { required: "Role tidak boleh kosong" },
             },
             errorElement: "span",
@@ -211,10 +229,12 @@ class User {
                     email: $('#email_edit').val(),
                     phone: $('#phone_edit').val(),
                     address: $('#address_edit').val(),
+                    password: $('#password_edit').val(),
                     role: $('#role_edit').val(),
+                    no_ktp: $('#no_ktp_edit').val(),
+                    gender: $('#gender_edit').val(),
                     _token: handle.token()
                 }
-                console.log(data)
 
                 if (handle.checkEmail(data["email"])) {
                     $.ajax({

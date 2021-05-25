@@ -23,11 +23,25 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->isMethod("POST")) {
+            return [
+                'name'                  => 'required|string',
+                'no_ktp'                  => 'required|unique:users',
+                'email'                 => 'required|email|string|unique:users',
+                'phone'                 => 'required|string',
+                'address'               => 'required|string',
+                'gender'               => 'required|string',
+                'password'              => 'required|string|min:8|confirmed',
+                'password_confirmation' => 'required|min:8|string'
+            ];
+        }
         return [
             'name'                  => 'required|string',
-            'email'                 => 'required|email|string|unique:users',
+            'no_ktp'                  => 'required',
+            'email'                 => 'required|email|string',
             'phone'                 => 'required|string',
             'address'               => 'required|string',
+            'gender'               => 'required|string',
             'password'              => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|min:8|string'
         ];
@@ -37,10 +51,13 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required'                         => 'Nama tidak boleh kosong',
+            'no_ktp.required'                         => 'Nomor KTP tidak boleh kosong',
             'email.required'                        => 'Email tidak boleh kosong',
             'email.unique'                          => 'Email sudah terdaftar',
             'email.email'                           => 'Email tidak valid',
+            'no_ktp.unique'                          => 'Nomor KTP sudah terdaftar',
             'phone.required'                        => 'Nomor HP tidak boleh kosong',
+            'gender.required'                        => 'Jenis kelamin tidak boleh kosong',
             'address.required'                      => 'Alamat tidak boleh kosong',
             'password.required'                     => 'Password tidak boleh kosong',
             'password.min'                          => 'Password minimal 8 karakter',
