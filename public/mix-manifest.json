@@ -2,5 +2,6 @@
     "/js/permission.js": "/js/permission.js",
     "/js/car.js": "/js/car.js",
     "/js/menu.js": "/js/menu.js",
-    "/js/car_type.js": "/js/car_type.js"
+    "/js/car_type.js": "/js/car_type.js",
+    "/js/transaction.js": "/js/transaction.js"
 }
