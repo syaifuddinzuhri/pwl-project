@@ -110,6 +110,24 @@
                                     <span class="text-danger mt-1">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <div class="form-group form-default @error('no_ktp') form-danger @enderror form-static-label">
+                                    <input type="text" name="no_ktp" class="form-control" placeholder="Masukkan nomor KTP" value="{{ old('no_ktp')}}">
+                                    <span class="form-bar"></span>
+                                    @error('no_ktp')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-default @error('no_ktp') form-danger @enderror form-static-label">
+                                    <select class="form-control" id="gender" name="gender" required>
+                                        <option hidden disabled selected>-- Pilih jenis kelamin --</option>
+                                        <option value="lk">Laki-laki</option>
+                                        <option value="pr">Perempuan</option>
+                                    </select>
+                                    <span class="form-bar"></span>
+                                    @error('gender')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div class="form-group form-default @error('email') form-danger @enderror form-static-label">
                                     <input type="email" name="email" class="form-control" placeholder="Masukkan email" value="{{ old('email')}}">
                                     <span class="form-bar"></span>

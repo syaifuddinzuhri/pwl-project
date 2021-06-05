@@ -91,7 +91,8 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
 
-                    <form class="md-float-material form-material">
+                    <form class="md-float-material form-material" method="POST" action="{{route('auth.login')}}">
+                        @csrf
                         <div class="text-center">
                             <img src="{{ asset('admin-templates')}}/images/logo.png" width="280" alt="logo.png">
                         </div>
@@ -102,19 +103,27 @@
                                         <h3 class="text-center">Log In</h3>
                                     </div>
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="email" class="form-control">
+                                <div class="form-group form-default @error('email') form-danger @enderror form-static-label">
+                                    <input type="text" name="email" class="form-control" placeholder="Masukkan email">
                                     <span class="form-bar"></span>
                                     <label class="float-label">Masukkan email</label>
+                                    @error('email')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+
                                 </div>
-                                <div class="form-group form-primary">
-                                    <input type="password" name="password" class="form-control">
+                                <div class="form-group form-default @error('password') form-danger @enderror form-static-label">
+                                    <input type="password" name="password" class="form-control" placeholder="Masukkan password">
                                     <span class="form-bar"></span>
                                     <label class="float-label">Masukkan password</label>
+                                    @error('password')
+                                    <span class="text-danger mt-1">{{ $message }}</span>
+                                    @enderror
+
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>
                                     </div>
                                 </div>
                                 <hr />
