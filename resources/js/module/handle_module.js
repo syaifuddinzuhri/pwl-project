@@ -56,7 +56,7 @@ class Handle {
             message = msg != null ? msg : "Unknown server";
         }
         $.toast({
-            text: `${settings}`,
+            text: `${msg}`,
             heading: 'Error',
             icon: 'error',
             position: 'top-left',

@@ -59,7 +59,7 @@ class CarType {
                 error: (e, x, settings, exception) => {
                     handle.spinner('#form-add-car-type .btn-loading', 'hide')
                     handle.spinner('#form-add-car-type .btn-submit', 'show')
-                    handle.errorhandle(e, x, settings, exception);
+                    handle.errorhandle(e, x, settings, exception, 'Data yang dimasukkan tidak valid');
                 },
             });
         })
@@ -113,7 +113,7 @@ class CarType {
                 error: (e, x, settings, exception) => {
                     handle.spinner('#editCarTypeModal .btn-loading', 'hide')
                     handle.spinner('#editCarTypeModal .btn-submit', 'show')
-                    handle.errorhandle(e, x, settings, exception);
+                    handle.errorhandle(e, x, settings, exception, 'Data yang dimasukkan tidak valid');
                 },
             });
         })

@@ -57,7 +57,7 @@
                                     <form class="form-material" action="{{route('car.store')}}" method="POST" enctype="multipart/form-data" id="form-add-car">
                                         @csrf
                                         <div class="form-group form-primary ">
-                                            <label for="car_type_id">Tipe Mobil</label>
+                                            <label for="car_type_id">Merek Mobil</label>
                                             <select class="form-control" name="car_type_id" id="car_type_id" required>
                                                 <option selected disabled></option>
                                                 @foreach ($car_types as $item)
@@ -70,7 +70,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group form-primary  ">
-                                            <label for="merk">Merk</label>
+                                            <label for="merk">Nama</label>
                                             <input type="text" class="form-control" name="merk" id="merk" value="{{ old('merk')}}" required>
                                             <span class="form-bar"></span>
                                             @error('merk')
@@ -151,8 +151,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Gambar</th>
-                                                <th>Tipe Mobil</th>
-                                                <th>Merk</th>
+                                                <th>Merek Mobil</th>
+                                                <th>Nama</th>
                                                 <th>No. Plat</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
@@ -219,6 +219,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="statusCarModal" tabindex="-1" aria-labelledby="statusCarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="statusCarModalLabel">Status Mobil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="loading">
+                <div class="text-primary"><span>Loading...</span></div>
+            </div>
+            <div class="body-status-car"></div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 

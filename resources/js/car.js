@@ -7,6 +7,7 @@ $(document).ready(function () {
     if (pathURL == "/car" || pathURL == "/car/*") {
         car.dataTable();
         car.deleteCar();
+        car.statusCar();
         car.showCar();
         car.changeFile("form-add-car", "image")
         $('.cars .reload-table').on('click', function () {

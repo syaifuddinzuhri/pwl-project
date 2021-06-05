@@ -25,7 +25,7 @@ class Car {
                             return (
                                 '<img src="' +
                                 img +
-                                '" class="img-responsive" style="width: 100px"/>'
+                                '" class="img-responsive img-thumbnail" style="width: 100px"/>'
                             );
                         } else {
                             return "";
@@ -90,6 +90,26 @@ class Car {
                     $('#showCarModal #loading').hide()
                     $('#showCarModal .body-show-car').show()
                     $('#showCarModal .body-show-car').html(res.html)
+                }
+            });
+        });
+    }
+
+    statusCar() {
+        handle.setup()
+        $("#table-cars").on("click", ".btn-status-car", function () {
+            var id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                url: `${APP_URL}/car/get-status/${id}`,
+                beforeSend: function () {
+                    $('#statusCarModal #loading').show()
+                    $('#statusCarModal .body-status-car').hide()
+                },
+                success: function (res) {
+                    $('#statusCarModal #loading').hide()
+                    $('#statusCarModal .body-status-car').show()
+                    $('#statusCarModal .body-status-car').html(res.html)
                 }
             });
         });

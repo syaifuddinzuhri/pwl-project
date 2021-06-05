@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarTypeRequest;
 use App\Models\CarType;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class CarTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CarTypeRequest $request)
     {
         $data = $this->model->create($request->only(['name']));
         return response()->json(['success' => true, 'data' => $data, 'messages' => 'Data berhasil ditambahkan'], 201);

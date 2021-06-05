@@ -58,7 +58,7 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group form-primary ">
-                                            <label for="car_type_id">Tipe Mobil</label>
+                                            <label for="car_type_id">Merek Mobil</label>
                                             <select class="form-control" name="car_type_id" id="car_type_id" required>
                                                 <option selected disabled></option>
                                                 @foreach ($car_types as $item)
@@ -71,7 +71,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group form-primary  ">
-                                            <label for="merk">Merk</label>
+                                            <label for="merk">Nama</label>
                                             <input type="text" class="form-control" name="merk" id="merk" value="{{ $car->merk }}" required>
                                             <span class="form-bar"></span>
                                             @error('merk')

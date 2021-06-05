@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Data Tipe Mobil ')
+@section('title', 'Data Merek Mobil ')
 
 @section('pageCSS')
 <link rel="stylesheet" href="{{ asset('admin-templates') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -25,7 +25,7 @@
                             <a href="index.html"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item">Manajemen Mobil</li>
-                        <li class="breadcrumb-item">Data Tipe Mobil</li>
+                        <li class="breadcrumb-item">Data Merek Mobil</li>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         <div class="col-md-4  mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Tambah Tipe Mobil</h5>
+                                    <h5>Tambah Merek Mobil</h5>
                                 </div>
                                 <div class="card-body">
                                     <form class="md-float-material form-material" id="form-add-car-type">
@@ -66,7 +66,7 @@
                         <div class="col-md-8">
                             <div class="card car-types">
                                 <div class="card-header">
-                                    <h5>Data Tipe Mobil</h5>
+                                    <h5>Data Merek Mobil</h5>
                                     <div class="card-header-right">
                                         <ul class="list-unstyled card-option">
                                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -104,7 +104,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editCarTypeModalLabel">Edit Tipe Mobil</h5>
+                <h5 class="modal-title" id="editCarTypeModalLabel">Edit Merek Mobil</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

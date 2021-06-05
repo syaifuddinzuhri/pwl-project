@@ -35,7 +35,7 @@ class CarController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge badge-success">Tersedia</span>' : '<span class="badge badge-danger">Tidak Tersedia</span>';
+                    return $data->status == 1 ? '<a href="javascript:void(0)" data-toggle="modal" data-id="' . $data->id . '" data-target="#statusCarModal" class="badge badge-success btn-status-car">Tersedia</a>' : '<a href="javascript:void(0)" data-toggle="modal" data-id="' . $data->id . '" data-target="#statusCarModal" class="badge badge-danger btn-status-car">Tidak Tersedia</a>';
                 })
                 ->editColumn('car_type', function ($data) {
                     return $data->car_type->name;
@@ -141,5 +141,18 @@ class CarController extends Controller
         }
         $this->model->delete($id);
         return response()->json(['success' => true, 'messages' => 'Data berhasil dihapus'], 200);
+    }
+
+    public function getStatus($id)
+    {
+        $data = $this->model->getModel()->where('id', $id)->select('status', 'id')->first();
+        return response()->json(['success' => true, 'html' => view('car.status', compact('data'))->render()], 200);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $payload = $request->only(['status']);
+        $this->model->update($payload, $id);
+        return redirect()->route('car.index');
     }
 }

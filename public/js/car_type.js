@@ -84,7 +84,7 @@ var CarType = /*#__PURE__*/function () {
           error: function error(e, x, settings, exception) {
             _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-car-type .btn-loading', 'hide');
             _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-car-type .btn-submit', 'show');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception);
+            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception, 'Data yang dimasukkan tidak valid');
           }
         });
       });
@@ -137,7 +137,7 @@ var CarType = /*#__PURE__*/function () {
           error: function error(e, x, settings, exception) {
             _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#editCarTypeModal .btn-loading', 'hide');
             _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#editCarTypeModal .btn-submit', 'show');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception);
+            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception, 'Data yang dimasukkan tidak valid');
           }
         });
       });
@@ -279,7 +279,7 @@ var Handle = /*#__PURE__*/function () {
       }
 
       $.toast({
-        text: "".concat(settings),
+        text: "".concat(msg),
         heading: 'Error',
         icon: 'error',
         position: 'top-left'
