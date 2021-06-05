@@ -17,10 +17,10 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('car_id');
-            $table->dateTime('lease_date');
-            $table->dateTime('return_date');
-            $table->dateTime('date_of_return');
-            $table->string('proof_of_payment');
+            $table->date('lease_date');
+            $table->date('return_date');
+            $table->date('date_of_return')->nullable();
+            $table->string('proof_of_payment')->nullable();
             $table->boolean('payment_status')->default(false);
             $table->foreign('car_id')
                 ->references('id')

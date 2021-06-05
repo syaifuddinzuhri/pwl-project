@@ -5,7 +5,7 @@
             <div class="main-menu-header">
                 <img class="img-80 img-radius" src="{{ asset('admin-templates')}}/images/avatar-4.jpg" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span id="more-details">Master<i class="fa fa-caret-down"></i></span>
+                    <span id="more-details">{{Auth::user()->name}}<i class="fa fa-caret-down"></i></span>
                 </div>
             </div>
             <div class="main-menu-content">
@@ -62,14 +62,14 @@
             <li class="pcoded-hasmenu {{ Request::segment(1) === 'car' || Request::segment(1) === 'car-type' ? 'active pcoded-trigger' : null }}">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-car"></i><b>BC</b></span>
-                    <span class="pcoded-mtext">Manajemen mobil</span>
+                    <span class="pcoded-mtext">Manajemen Mobil</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="{{ Request::segment(1) === 'car-type' ? 'active' : null }}">
                         <a href="{{ route('car-type.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Data Tipe Mobil</span>
+                            <span class="pcoded-mtext">Data Merek Mobil</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -83,15 +83,15 @@
                 </ul>
             </li>
 
-            <li class="pcoded-hasmenu">
+            <li class="pcoded-hasmenu {{ Request::segment(1) === 'transaction' ? 'active pcoded-trigger' : null }}">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>BC</b></span>
                     <span class="pcoded-mtext">Manajemen Sewa</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li>
-                        <a href="breadcrumb.html" class="waves-effect waves-dark">
+                    <li class="{{ Request::segment(1) === 'transaction' ? 'active' : null }}">
+                        <a href="{{route('transaction.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Penyewaan</span>
                             <span class="pcoded-mcaret"></span>
@@ -109,24 +109,17 @@
         </ul>
         <div class="pcoded-navigation-label">USER</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="index.html" class="waves-effect waves-dark">
+            <li class="{{ Request::segment(1) === 'customer' && Request::segment(2) === 'car'  ? 'active' : null }}">
+                <a href="{{route('customer.car.index')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-car"></i><b>D</b></span>
                     <span class="pcoded-mtext">Mobil</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li>
-                <a href="index.html" class="waves-effect waves-dark">
+            <li class="{{ Request::segment(1) === 'customer' && Request::segment(2) === 'transaction'  ? 'active' : null }}">
+                <a href="{{route('customer.transaction.index')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-shopping-cart"></i><b>D</b></span>
                     <span class="pcoded-mtext">Penyewaan</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="index.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-world"></i><b>D</b></span>
-                    <span class="pcoded-mtext">Riwayat Penyewaan</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>

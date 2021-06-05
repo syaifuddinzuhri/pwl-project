@@ -79,7 +79,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->model->getModel()::with(['car','user'])->where('id', $id)->first();;
+        $data = $this->model->getModel()::with(['car', 'user'])->where('id', $id)->first();
         return response()->json(['success' => true, 'data' => $data], 200);
     }
 
