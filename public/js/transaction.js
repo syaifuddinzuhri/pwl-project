@@ -92,7 +92,7 @@ var Handle = /*#__PURE__*/function () {
       }
 
       $.toast({
-        text: "".concat(settings),
+        text: "".concat(msg),
         heading: 'Error',
         icon: 'error',
         position: 'top-left'

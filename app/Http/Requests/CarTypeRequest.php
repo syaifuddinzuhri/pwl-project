@@ -32,6 +32,6 @@ class CarTypeRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama merek harus diisi.'
-        ]
+        ];
     }
 }
