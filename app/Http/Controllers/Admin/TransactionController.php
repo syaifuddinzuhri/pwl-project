@@ -94,7 +94,7 @@ class TransactionController extends Controller
     {
         $data = $request->only(['payment_status', 'date_of_return']);
         $this->model->update($data, $id);
-        return redirect()->route('transaction.index')->with('success', 'Data berhasil diubah');
+        return response()->json(['success' => true, 'data' => $data, 'messages' => 'Data berhasil diupdate'], 200);
     }
 
     /**

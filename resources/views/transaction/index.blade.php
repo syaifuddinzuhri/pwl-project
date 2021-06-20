@@ -151,7 +151,7 @@
                         </div>
                         <label class="col-12 col-form-label">Tanggal Kembali</label>
                         <div class="col-12">
-                            <input type="datetime" class="form-control" id="date-of-return-edit">
+                            <input type="date" name="date_of_return" class="form-control" id="date-of-return-edit">
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use App\Models\Menu;
+
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\CarTypeController;
 use App\Http\Controllers\Admin\PermissionController;

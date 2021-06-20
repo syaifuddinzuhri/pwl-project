@@ -34,7 +34,7 @@ class UserController extends Controller
                     return $data->gender == "lk" ? 'Laki-laki' : 'Perempuan';
                 })
                 ->editColumn('role', function ($data) {
-                    return '<span class="badge badge-dark mr-2 py-1 px-2">' . $data->roles->pluck('name')[0] . '</span>';
+                    return '<span class="badge badge-dark mr-2 py-1 px-2">' . $data->roles[0]->name . '</span>';
                 })
                 ->addColumn('action', function ($data) {
                     $button = '<div class="btn-group" role="group">';
@@ -48,6 +48,7 @@ class UserController extends Controller
         }
         $roles = Role::all();
         $users = User::with('roles')->get();
+        // return $users;
         return view('user.index', compact('users', 'roles'));
     }
 

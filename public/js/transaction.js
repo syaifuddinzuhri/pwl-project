@@ -235,7 +235,7 @@ var Transaction = /*#__PURE__*/function () {
               $("#payment-status-edit").attr("checked", false);
             }
 
-            $('#img-payment').html("<img src=\"/proof_of_payment/".concat(res.data.proof_of_payment, "\" class=\"img-responsive\" width=\"300\" height=\"200\" />"));
+            $('#img-payment').html("<img src=\"".concat(APP_URL, "/storage/payment/").concat(res.data.proof_of_payment, "\" class=\"img-responsive\" width=\"300\" height=\"200\" />"));
           }
         });
       });

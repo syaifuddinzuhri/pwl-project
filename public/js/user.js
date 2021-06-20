@@ -168,22 +168,7 @@ var User = /*#__PURE__*/function () {
           name: "DT_RowIndex",
           className: "text-center",
           width: "4%"
-        }, // {
-        //     data: "image",
-        //     render: function (data) {
-        //         if (data != null) {
-        //             var img = `${APP_URL}/room/${data}`;
-        //             return (
-        //                 '<img src="' +
-        //                 img +
-        //                 '" class="img-responsive" style="width: 100px"/>'
-        //             );
-        //         } else {
-        //             return "";
-        //         }
-        //     },
-        // },
-        {
+        }, {
           data: "name",
           name: "name"
         }, {

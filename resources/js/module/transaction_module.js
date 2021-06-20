@@ -92,14 +92,14 @@ class Transaction {
                     }else{
                         $("#payment-status-edit").attr("checked", false);
                     }
-                    $('#img-payment').html(`<img src="/proof_of_payment/${res.data.proof_of_payment}" class="img-responsive" width="300" height="200" />`);
+                    $('#img-payment').html(`<img src="${APP_URL}/storage/payment/${res.data.proof_of_payment}" class="img-responsive" width="300" height="200" />`);
                 },
             });
         });
-
+        
         $("#form-edit-transaction").on("submit", function (e) {
             e.preventDefault()
-            var data = {
+            let data = {
                 payment_status: isActive,
                 date_of_return: $("#date-of-return-edit").val(),
                 _token: handle.token()

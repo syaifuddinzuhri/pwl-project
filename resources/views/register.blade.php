@@ -163,6 +163,7 @@
                                     <span class="text-danger mt-1">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="role" value="2">
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Daftar</button>
