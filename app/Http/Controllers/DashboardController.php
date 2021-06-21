@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarType;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,8 @@ class DashboardController extends Controller
     {
         $cars = Car::count();
         $car_types = CarType::count();
-        return view('dashboard', compact('cars', 'car_types'));
+        $trans = Transaction::count();
+        $customer = User::where('role', 'usr')->count();
+        return view('dashboard', compact('cars', 'car_types', 'customer', 'trans'));
     }
 }

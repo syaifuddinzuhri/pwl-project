@@ -33,6 +33,7 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
+                    @if (Auth::user()->role == "adm")
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
@@ -42,8 +43,8 @@
                                             <i class="ti-user text-c-purple f-24"></i>
                                         </div>
                                         <div class="col-8 p-l-0">
-                                            <h5>1000</h5>
-                                            <p class="text-muted m-b-0">Pelanggan</p>
+                                            <h5>{{$customer}}</h5>
+                                            <p class="text-muted m-b-0">Customer</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +88,7 @@
                                             <i class="ti-shopping-cart text-c-purple f-24"></i>
                                         </div>
                                         <div class="col-8 p-l-0">
-                                            <h5>300</h5>
+                                            <h5>{{$trans}}</h5>
                                             <p class="text-muted m-b-0">Penyewaan</p>
                                         </div>
                                     </div>
@@ -95,6 +96,15 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert bg-primary">
+                                Halo, {{Auth::user()->name}}.
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <!-- Page-body end -->
             </div>

@@ -11,6 +11,7 @@ use App\Models\Car;
 use Yajra\DataTables\Facades\DataTables;
 
 use function App\Helpers\dateDiffInDays;
+use function App\Helpers\deleteFile;
 
 class TransactionController extends Controller
 {
@@ -129,6 +130,10 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
+        $data = $this->model->show($id);
+        if ($data->proof_of_payment) {
+            deleteFile($data->proof_of_payment, 'payment');
+        }
         $this->model->delete($id);
         return response()->json(['success' => true, 'messages' => 'Data berhasil dihapus'], 200);
     }
