@@ -105,15 +105,15 @@
                                             <label for="role">Role</label>
                                             <select class="form-control" name="role" id="role" required>
                                                 <option selected disabled></option>
-                                                @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}" {{$user->roles[0]->id == $role->id ? 'selected' : ''}}>{{ $role->name}}</option>
-                                                @endforeach
+                                                <option value="adm" {{$user->role == "adm" ? 'selected' : ''}}>Admin</option>
+                                                <option value="usr" {{$user->role == "usr" ? 'selected' : ''}}>Customer</option>
                                             </select>
                                             <span class="form-bar"></span>
                                             @error('role')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
                                         <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-save"></i>Simpan</button>
                                     </form>
                                 </div>

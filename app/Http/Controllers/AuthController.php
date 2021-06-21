@@ -55,7 +55,6 @@ class AuthController extends Controller
         $password = Hash::make($request->password);
         $payload = array_merge($data, ['password' => $password]);
         $user = $this->model->create($payload);
-        $user->assignRole($request->role);
         toast('Registrasi berhasil', 'success');
         return redirect()->route('auth.login');
     }

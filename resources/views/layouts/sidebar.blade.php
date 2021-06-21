@@ -11,8 +11,13 @@
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
-                        <a href="user-profile.html"><i class="ti-user"></i>Profil</a>
-                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                        <a href="#" onclick="event.preventDefault();
+                        document.getElementById('logout-form2').submit();"><i class="ti-layout-sidebar-left"></i> Logout
+
+                        </a>
+                        <form id="logout-form2" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -27,6 +32,8 @@
                 </a>
             </li>
         </ul>
+        @if (Auth::check())
+        @if (Auth::user()->role == "adm")
         <div class="pcoded-navigation-label">ADMINISTRATOR</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu {{ Request::segment(1) === 'user' || Request::segment(1) === 'role' || Request::segment(1) === 'permission' ? 'active pcoded-trigger' : null }}">
@@ -40,20 +47,6 @@
                         <a href="{{ route('user.index')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Data User</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="{{ Request::segment(1) === 'role' ? 'active' : null }}">
-                        <a href="{{ route('role.index')}}" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Roles</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="{{ Request::segment(1) === 'permission' ? 'active' : null }}">
-                        <a href="{{ route('permission.index')}}" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Permissions</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
@@ -99,15 +92,9 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="index.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-printer"></i><b>D</b></span>
-                    <span class="pcoded-mtext">Laporan</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
         </ul>
-        <div class="pcoded-navigation-label">USER</div>
+        @else
+        <div class="pcoded-navigation-label">CUSTOMER</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="{{ Request::segment(1) === 'customer' && Request::segment(2) === 'car'  ? 'active' : null }}">
                 <a href="{{route('customer.car.index')}}" class="waves-effect waves-dark">
@@ -124,5 +111,8 @@
                 </a>
             </li>
         </ul>
+        @endif
+        @endif
+
     </div>
 </nav>

@@ -6,9 +6,7 @@ $(document).ready(function () {
 
     if (pathURL == "/user" || pathURL == "/user/*") {
         user.dataTable();
-        // user.storeUser();
         user.deleteUser();
-        // user.editUser();
         $('.users .reload-table').on('click', function () {
             $("#table-users").DataTable().ajax.reload();
         })

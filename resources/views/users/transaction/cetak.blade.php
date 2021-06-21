@@ -1,143 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <title>Nota Penyewaan Mobil</title>
 
-    <title>Bukti Sewa Mobil</title>
     <style>
-        .container {
-            text-align: center;
+        .invoice-box {
+            width: 100%;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
         }
 
-        body {
-            overflow-x: hidden;
-            padding: 0 200px;
-        }
-
-        table {
-            color: #232323;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            /* border: 1px solid #999; */
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
             text-align: left;
-            padding: 8px 20px;
         }
 
-        #table2,
-        #table2 th,
-        #table2 td {
-            border: 1px solid #999;
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            /* text-align: right; */
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .invoice-box.rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box.rtl table {
+            text-align: right;
+        }
+
+        .invoice-box.rtl table tr td:nth-child(2) {
+            text-align: left;
         }
 
     </style>
 </head>
+
 <body>
-    {{-- <div class="container">
-        <h2>Bukti Sewa Mobil</h2>
-        <h1>Premium RentCar</h1>
-        <table>
-            <tr>
-                <td>No. KTP</td>
-                <td>:</td>
-                <th>{{$data->user->no_ktp}}</th>
-    </tr>
-    <tr>
-        <td>Nama</td>
-        <td>:</td>
-        <th>{{$data->user->name}}</th>
-    </tr>
-    <tr>
-        <td>Jenis Kelamin</td>
-        <td>:</td>
-        <th>{{ $data->user->gender == 'lk' ? 'Laki-laki' : 'Perempuan'}}</th>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td>:</td>
-        <th>{{$data->user->email}}</th>
-    </tr>
-    <tr>
-        <td>Alamat</td>
-        <td>:</td>
-        <th>{{$data->user->address}}</th>
-    </tr>
-    <tr>
-        <td>Nomor HP</td>
-        <td>:</td>
-        <th>{{$data->user->phone}}</th>
-    </tr>
-    </table>
-    <hr>
-    <table style="border: 1px solid #999; width: 100%; margin: 20px 0; " id="table2">
-        <tr>
-            <th>Merek Mobil</th>
-            <th>Nama Mobil</th>
-            <th>Nomor Plat</th>
-            <th>Tahun</th>
-            <th>Warna</th>
-        </tr>
-        <tr>
-            <td>{{$data->car->car_type->name}}</td>
-            <td>{{$data->car->merk}}</td>
-            <td>{{$data->car->no_plat}}</td>
-            <td>{{$data->car->year}}</td>
-            <td>{{$data->car->color}}</td>
-        </tr>
-    </table>
-    <hr>
-    <table>
-        <tr>
-            <td>Tanggal Sewa</td>
-            <td>:</td>
-            <th>{{date('d-m-Y', strtotime($data->lease_date))}}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <td>Tanggal Kembali</td>
-            <td>:</td>
-            <th>{{date('d-m-Y', strtotime($data->return_date))}}</th>
-        </tr>
-        <tr>
-            <td>Harga Sewa Per Hari</td>
-            <td>:</td>
-            <th>Rp. {{ number_format($data->car->price, 0, ',', '.')}}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <td><strong>TOTAL HARGA SEWA</strong></td>
-            <td>:</td>
-            <th>Rp. {{ number_format($sewa, 0, ',', '.')}}</th>
-        </tr>
-    </table>
-    @if ($data->return_date < now()) <hr>
-        <table>
-            <tr>
-                <td>Tanggal Pengembalian</td>
-                <td>:</td>
-                <th>{{ $data->date_of_return}}</th>
-            </tr>
-            <tr>
-                <td>Harga Denda Per Hari</td>
-                <td>:</td>
-                <th>Rp. {{ number_format($data->car->fine, 0, ',', '.')}}</th>
-            </tr>
-            <tr>
-                <td><strong>TOTAL BAYAR DENDA</strong></td>
-                <td>:</td>
-                <th>Rp. {{ number_format($denda, 0, ',', '.')}}</th>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="6">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <h4>Premium <span style="color: blue;">RentCar</span></h4>
+                            </td>
+                            <td>
+                                Created: {{date('Y-m-d', strtotime(now()))}}<br />
+                                Due: {{ $data->return_date}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
 
+            <tr class="information">
+                <td colspan="6">
+                    <table>
+                        <tr>
+                            <td>
+                                {{$data->user->name}}<br />
+                                {{$data->user->no_ktp}}<br />
+                                {{$data->user->phone}} |
+                                {{$data->user->email}}
+                            </td>
+
+                            <td>
+                                Administrator<br />
+                                admin.premiumrentcar@gmail.com<br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr class="heading">
+                <td>Merek Mobil</td>
+                <td>Nama</td>
+                <td>Harga Sewa (Rp)</td>
+                <td>Tanggal Sewa</td>
+                <td>Tanggal Kembali</td>
+                <td>Subtotal (Rp)</td>
+            </tr>
+
+            <tr class="item">
+                <td>{{$data->car->car_type->name}}</td>
+                <td>{{$data->car->merk}}</td>
+                <td>{{$data->car->price}}</td>
+                <td>{{$data->lease_date}}</td>
+                <td>{{$data->return_date}}</td>
+                <td>{{$sewa}}</td>
+            </tr>
+
+
+            {{-- <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{$sewa}}</td>
+            </tr> --}}
+            <hr>
+            <tr>
+                <td style="font-weight: bold;">Harga Denda/hari (Rp) : </td>
+                <td>{{$data->car->fine}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Tanggal Pengembalian : </td>
+                <td>{{$data->date_of_return}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Total Denda (Rp) : </td>
+                <td>{{$denda}}</td>
+            </tr>
+            <tr class="total">
+                <td>TOTAL (Rp) : </td>
+                <td>{{$sewa + $denda}}</td>
+            </tr>
         </table>
-        @endif
-        </div> --}}
+    </div>
 </body>
 </html>

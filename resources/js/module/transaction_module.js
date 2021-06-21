@@ -43,7 +43,18 @@ class Transaction {
                 },
                 {
                     data: "proof_of_payment",
-                    name: "proof_of_payment",
+                    render: function (data) {
+                        if (data != null) {
+                            var img = `${APP_URL}/storage/payment/${data}`;
+                            return (
+                                '<img src="' +
+                                img +
+                                '" class="img-responsive img-thumbnail" style="width: 100px"/>'
+                            );
+                        } else {
+                            return "";
+                        }
+                    },
                 },
                 {
                     data: "payment_status",
@@ -87,16 +98,16 @@ class Transaction {
                     $('#lease-date-edit').val(res.data.lease_date);
                     $('#return-date-edit').val(res.data.return_date);
                     $('#date-of-return-edit').val(res.data.date_of_return);
-                    if(res.data.payment_status == 1 ){
+                    if (res.data.payment_status == 1) {
                         $("#payment-status-edit").attr("checked", true);
-                    }else{
+                    } else {
                         $("#payment-status-edit").attr("checked", false);
                     }
                     $('#img-payment').html(`<img src="${APP_URL}/storage/payment/${res.data.proof_of_payment}" class="img-responsive" width="300" height="200" />`);
                 },
             });
         });
-        
+
         $("#form-edit-transaction").on("submit", function (e) {
             e.preventDefault()
             let data = {

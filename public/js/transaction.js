@@ -188,7 +188,14 @@ var Transaction = /*#__PURE__*/function () {
           name: "date_of_return"
         }, {
           data: "proof_of_payment",
-          name: "proof_of_payment"
+          render: function render(data) {
+            if (data != null) {
+              var img = "".concat(APP_URL, "/storage/payment/").concat(data);
+              return '<img src="' + img + '" class="img-responsive img-thumbnail" style="width: 100px"/>';
+            } else {
+              return "";
+            }
+          }
         }, {
           data: "payment_status",
           name: "payment_status"
@@ -389,8 +396,8 @@ $(document).ready(function () {
   var splitURL = pathURL.split("/");
 
   if (pathURL == "/transaction" || pathURL == "/transaction/*") {
-    _module_transaction_module__WEBPACK_IMPORTED_MODULE_0__.transaction.dataTable();
-    _module_transaction_module__WEBPACK_IMPORTED_MODULE_0__.transaction.editTransaction();
+    _module_transaction_module__WEBPACK_IMPORTED_MODULE_0__.transaction.dataTable(); // transaction.editTransaction();
+
     _module_transaction_module__WEBPACK_IMPORTED_MODULE_0__.transaction.deleteTransaction();
   }
 

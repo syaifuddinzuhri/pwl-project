@@ -30,11 +30,11 @@
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
-                        <li class="waves-effect waves-light">
+                        {{-- <li class="waves-effect waves-light">
                             <a href="user-profile.html">
                                 <i class="ti-user"></i> Profil
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="waves-effect waves-light">
                             <a href="#" onclick="event.preventDefault();
                         document.getElementById('logout-form2').submit();"><i class="ti-layout-sidebar-left"></i> Logout

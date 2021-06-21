@@ -102,6 +102,13 @@
                                     <div class="col-md-12">
                                         <h3 class="text-center">Log In</h3>
                                     </div>
+                                    @if (Session::has('error'))
+                                    <div class="col">
+                                        <div class="alert bg-danger">
+                                            {{Session::get('error')}}
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <div class="form-group form-default @error('email') form-danger @enderror form-static-label">
                                     <input type="text" name="email" class="form-control" placeholder="Masukkan email">

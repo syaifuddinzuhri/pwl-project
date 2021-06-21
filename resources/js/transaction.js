@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     if (pathURL == "/transaction" || pathURL == "/transaction/*") {
         transaction.dataTable();
-        transaction.editTransaction();
+        // transaction.editTransaction();
         transaction.deleteTransaction();
     }
 

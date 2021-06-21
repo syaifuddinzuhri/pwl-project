@@ -26,15 +26,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $data = User::get();
         if ($request->ajax()) {
-            $data = User::with('roles')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('gender', function ($data) {
                     return $data->gender == "lk" ? 'Laki-laki' : 'Perempuan';
                 })
                 ->editColumn('role', function ($data) {
-                    return '<span class="badge badge-dark mr-2 py-1 px-2">' . $data->roles[0]->name . '</span>';
+                    if ($data->role == "adm") {
+                        return '<span class="badge badge-dark mr-2 py-1 px-2">Admin</span>';
+                    } else {
+                        return '<span class="badge badge-dark mr-2 py-1 px-2">Customer</span>';
+                    }
                 })
                 ->addColumn('action', function ($data) {
                     $button = '<div class="btn-group" role="group">';
@@ -46,10 +50,7 @@ class UserController extends Controller
                 ->rawColumns(['action', 'role', 'gender'])
                 ->make(true);
         }
-        $roles = Role::all();
-        $users = User::with('roles')->get();
-        // return $users;
-        return view('user.index', compact('users', 'roles'));
+        return view('user.index', compact('data'));
     }
 
     /**
@@ -69,11 +70,12 @@ class UserController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        $data = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender']);
-        $password = Hash::make($request->password);
-        $payload = array_merge($data, ['password' => $password]);
-        $user = $this->model->create($payload);
-        $user->assignRole($request->role);
+        $payload = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender']);
+        $payload['password'] = Hash::make($request->password);
+        if ($request->role) {
+            $payload['role'] = $request->role;
+        }
+        $this->model->create($payload);
         return redirect()->back();
     }
 
@@ -96,9 +98,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::all();
-        $user = User::with('roles')->findOrFail($id);
-        return view('user.edit', compact('user', 'roles'));
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -110,10 +111,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender']);
+        $data = $request->only(['name', 'email', 'address', 'phone', 'no_ktp', 'gender', 'role']);
         $this->model->update($data, $id);
-        $user = $this->model->show($id);
-        $user->syncRoles($request->role);
         return redirect()->route('user.index')->with('success', 'Data berhasil diupdate');
     }
 
@@ -125,8 +124,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::with('roles')->findOrFail($id);
-        $user->syncRoles($user->roles);
         $this->model->delete($id);
         return response()->json(['success' => true, 'messages' => 'Data berhasil dihapus'], 200);
     }

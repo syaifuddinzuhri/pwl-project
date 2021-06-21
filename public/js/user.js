@@ -169,11 +169,14 @@ var User = /*#__PURE__*/function () {
           className: "text-center",
           width: "4%"
         }, {
+          data: "no_ktp",
+          name: "no_ktp"
+        }, {
           data: "name",
           name: "name"
         }, {
-          data: "no_ktp",
-          name: "no_ktp"
+          data: "role",
+          name: "role"
         }, {
           data: "email",
           name: "email"
@@ -187,297 +190,12 @@ var User = /*#__PURE__*/function () {
           data: "address",
           name: "address"
         }, {
-          data: "role",
-          name: "role"
-        }, {
           data: "action",
           name: "action",
           className: "text-center",
           orderable: false,
           searchable: false
         }]
-      });
-    }
-  }, {
-    key: "storeUser",
-    value: function storeUser() {
-      _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.setup();
-      $("#form-add-user").validate({
-        rules: {
-          name: {
-            required: true
-          },
-          no_ktp: {
-            required: true
-          },
-          gender: {
-            required: true
-          },
-          email: {
-            required: true,
-            email: true
-          },
-          phone: {
-            required: true
-          },
-          address: {
-            required: true
-          },
-          password: {
-            required: true,
-            minlength: 8
-          },
-          password_confirmation: {
-            required: true,
-            equalTo: "#password"
-          },
-          role: {
-            required: true
-          }
-        },
-        messages: {
-          name: {
-            required: "Nama tidak boleh kosong"
-          },
-          gender: {
-            required: "Jenis kelamin tidak boleh kosong"
-          },
-          no_ktp: {
-            required: "Nomor KTP tidak boleh kosong"
-          },
-          email: {
-            required: "Email tidak boleh kosong",
-            email: 'Email tidak valid'
-          },
-          phone: {
-            required: "Nomor HP tidak boleh kosong"
-          },
-          address: {
-            required: "Alamat tidak boleh kosong"
-          },
-          password: {
-            required: "Password tidak boleh kosong",
-            minlength: "Password minimal 8 karakter"
-          },
-          password_confirmation: {
-            required: "Konfirmasi password tidak boleh kosong",
-            equalTo: "Password tidak sama"
-          },
-          role: {
-            required: "Role tidak boleh kosong"
-          }
-        },
-        errorElement: "span",
-        errorPlacement: function errorPlacement(error, element) {
-          error.addClass("invalid-feedback");
-          element.closest(".form-group").append(error);
-        },
-        highlight: function highlight(element, errorClass, validClass) {
-          $(element).closest(".form-group").addClass("form-danger");
-        },
-        unhighlight: function unhighlight(element, errorClass, validClass) {
-          $(element).closest(".form-group").removeClass("form-danger");
-        },
-        submitHandler: function submitHandler() {
-          var data = {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            phone: $('#phone').val(),
-            address: $('#address').val(),
-            password: $('#password').val(),
-            role: $('#role').val(),
-            no_ktp: $('#no_ktp').val(),
-            gender: $('#gender').val(),
-            _token: _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.token()
-          };
-
-          if (_handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.checkEmail(data["email"])) {
-            $.ajax({
-              url: APP_URL + "/user",
-              type: "POST",
-              data: data,
-              beforeSend: function beforeSend() {
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-submit', 'hide');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-loading', 'show');
-              },
-              success: function success(res) {
-                if (res) {
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-submit', 'show');
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-loading', 'hide');
-                  $("#table-users").DataTable().ajax.reload();
-                  $("#form-add-user")[0].reset();
-                  $("#addUserModal").modal("hide");
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.toastSuccess(res.messages);
-                }
-              },
-              error: function error(e, x, settings, exception) {
-                // console.log(err.responseJSON)
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-submit', 'show');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-loading', 'hide');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception);
-              }
-            });
-          } else {
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-submit', 'show');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-add-user .btn-loading', 'hide');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.toastError('Email tidak valid');
-          }
-        }
-      });
-    }
-  }, {
-    key: "editUser",
-    value: function editUser() {
-      _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.setup();
-      var id = "";
-      $("#table-users").on("click", ".btn-edit-user", function () {
-        id = $(this).data('id');
-        $.ajax({
-          type: "GET",
-          url: "".concat(APP_URL, "/user/").concat(id, "/edit"),
-          beforeSend: function beforeSend() {
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#body-edit-user', 'hide');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#loading', 'show');
-          },
-          success: function success(res) {
-            $('#role_edit option').each(function () {
-              $(this).remove();
-            });
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#loading', 'hide');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#body-edit-user', 'show');
-            var roles = res.data['roles'];
-            var user = res.data[0]['user'];
-            $.each(roles, function (index, item) {
-              var selected = item.id === user.roles[0].id ? 'selected' : '';
-              $('#role_edit').append($("<option ".concat(selected, " value=").concat(item.id, ">").concat(item.name, "</option>")));
-            });
-            $('#name_edit').val(user.name);
-            $('#email_edit').val(user.email);
-            $('#phone_edit').val(user.phone);
-            $('#address_edit').val(user.address);
-          }
-        });
-      });
-      $("#form-edit-user").validate({
-        rules: {
-          name: {
-            required: true
-          },
-          no_ktp: {
-            required: true
-          },
-          gender: {
-            required: true
-          },
-          email: {
-            required: true,
-            email: true
-          },
-          phone: {
-            required: true
-          },
-          address: {
-            required: true
-          },
-          password: {
-            required: true,
-            minlength: 8
-          },
-          password_confirmation: {
-            required: true,
-            equalTo: "#password"
-          },
-          role: {
-            required: true
-          }
-        },
-        messages: {
-          name: {
-            required: "Nama tidak boleh kosong"
-          },
-          gender: {
-            required: "Jenis kelamin tidak boleh kosong"
-          },
-          no_ktp: {
-            required: "Nomor KTP tidak boleh kosong"
-          },
-          email: {
-            required: "Email tidak boleh kosong",
-            email: 'Email tidak valid'
-          },
-          phone: {
-            required: "Nomor HP tidak boleh kosong"
-          },
-          address: {
-            required: "Alamat tidak boleh kosong"
-          },
-          password: {
-            required: "Password tidak boleh kosong",
-            minlength: "Password minimal 8 karakter"
-          },
-          password_confirmation: {
-            required: "Konfirmasi password tidak boleh kosong",
-            equalTo: "Password tidak sama"
-          },
-          role: {
-            required: "Role tidak boleh kosong"
-          }
-        },
-        errorElement: "span",
-        errorPlacement: function errorPlacement(error, element) {
-          error.addClass("invalid-feedback");
-          element.closest(".form-group").append(error);
-        },
-        highlight: function highlight(element, errorClass, validClass) {
-          $(element).closest(".form-group").addClass("form-danger");
-        },
-        unhighlight: function unhighlight(element, errorClass, validClass) {
-          $(element).closest(".form-group").removeClass("form-danger");
-        },
-        submitHandler: function submitHandler() {
-          var data = {
-            name: $('#name_edit').val(),
-            email: $('#email_edit').val(),
-            phone: $('#phone_edit').val(),
-            address: $('#address_edit').val(),
-            password: $('#password_edit').val(),
-            role: $('#role_edit').val(),
-            no_ktp: $('#no_ktp_edit').val(),
-            gender: $('#gender_edit').val(),
-            _token: _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.token()
-          };
-
-          if (_handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.checkEmail(data["email"])) {
-            $.ajax({
-              url: APP_URL + "/user/" + id,
-              type: "PUT",
-              data: data,
-              beforeSend: function beforeSend() {
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-submit', 'hide');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-loading', 'show');
-              },
-              success: function success(res) {
-                if (res) {
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-submit', 'show');
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-loading', 'hide');
-                  $("#table-users").DataTable().ajax.reload();
-                  $("#form-edit-user")[0].reset();
-                  $("#editUserModal").modal("hide");
-                  _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.toastSuccess(res.messages);
-                }
-              },
-              error: function error(e, x, settings, exception) {
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-submit', 'show');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-loading', 'hide');
-                _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.errorhandle(e, x, settings, exception);
-              }
-            });
-          } else {
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-submit', 'show');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.spinner('#form-edit-user .btn-loading', 'hide');
-            _handle_module__WEBPACK_IMPORTED_MODULE_0__.handle.toastError('Email tidak valid');
-          }
-        }
       });
     }
   }, {
@@ -597,10 +315,8 @@ $(document).ready(function () {
   var splitURL = pathURL.split("/");
 
   if (pathURL == "/user" || pathURL == "/user/*") {
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.dataTable(); // user.storeUser();
-
-    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.deleteUser(); // user.editUser();
-
+    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.dataTable();
+    _module_user_module__WEBPACK_IMPORTED_MODULE_0__.user.deleteUser();
     $('.users .reload-table').on('click', function () {
       $("#table-users").DataTable().ajax.reload();
     });

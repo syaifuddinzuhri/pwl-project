@@ -42,9 +42,9 @@
                         </div>
                         @else
                         @foreach ($data as $item)
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
-                                <img src="{{ asset('storage/car/' . $item->image)}}" class="card-img-top" alt="{{$item->merk}}" style="height: 240px; object-fit: cover;">
+                                <img src="{{ asset('storage/car/' . $item->image)}}" class="card-img-top" alt="{{$item->merk}}" style="height: 200px; object-fit: cover;">
                                 <div class="card-body">
                                     <span class="badge badge-info mb-2">{{$item->car_type->name}}</span>
                                     <h5>{{$item->merk}}</h5>

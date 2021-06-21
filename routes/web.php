@@ -35,12 +35,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/submenu', [MenuController::class, 'submenu']);
-    Route::get('/submenu/{id}/edit', [MenuController::class, 'editSubmenu']);
-    Route::post('/store-submenu', [MenuController::class, 'storeSubmenu'])->name('menu.store-submenu');
-    Route::patch('/update-submenu/{id}', [MenuController::class, 'updateSubmenu']);
 
-    Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
+
+    Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['role:usr']], function () {
         Route::get('/', function () {
             return redirect()->route('dashboard.index');
         });
@@ -52,15 +49,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('transaction', UserTransactionController::class);
     });
 
-
-    Route::get('car/get-status/{id}', [CarController::class, 'getStatus']);
-    Route::put('car/update-status/{id}', [CarController::class, 'updateStatus'])->name('car.updatestatus');
-
-    Route::resource('user', UserController::class);
-    Route::resource('role', RoleController::class);
-    Route::resource('permission', PermissionController::class);
-    Route::resource('menu', MenuController::class);
-    Route::resource('car', CarController::class);
-    Route::resource('car-type', CarTypeController::class);
-    Route::resource('transaction', TransactionController::class);
+    Route::middleware(['role:adm'])->group(function () {
+        Route::get('car/get-status/{id}', [CarController::class, 'getStatus']);
+        Route::put('car/update-status/{id}', [CarController::class, 'updateStatus'])->name('car.updatestatus');
+        Route::put('transaction/update-pengembalian/{id}', [TransactionController::class, 'updatePengembalian'])->name('updatePengembalian');
+        Route::resource('user', UserController::class);
+        Route::resource('car', CarController::class);
+        Route::resource('car-type', CarTypeController::class);
+        Route::resource('transaction', TransactionController::class);
+    });
 });

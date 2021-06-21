@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Repositories\Repository;
 use App\Models\Transaction;
 use App\Http\Requests\TransactionRequest;
+use App\Models\Car;
 use Yajra\DataTables\Facades\DataTables;
+
+use function App\Helpers\dateDiffInDays;
 
 class TransactionController extends Controller
 {
@@ -26,14 +29,28 @@ class TransactionController extends Controller
         if ($request->ajax()) {
             return DataTables::of($transaction)
                 ->addIndexColumn()
+                ->editColumn('date_of_return', function ($transaction) {
+                    if ($transaction->date_of_return == null) {
+                        return '<span class="badge badge-danger">Belum Update</span>';
+                    } else {
+                        return $transaction->date_of_return;
+                    }
+                })
+                ->editColumn('payment_status', function ($transaction) {
+                    if ($transaction->payment_status == 0) {
+                        return '<span class="badge badge-danger">Belum Verifikasi</span>';
+                    } else {
+                        return '<span class="badge badge-success">Sudah Verifikasi</span>';
+                    }
+                })
                 ->addColumn('action', function ($transaction) {
                     $button = '<div class="btn-group" role="group">';
-                    $button .= '<a  href="javascript:void(0)" data-toggle="modal" data-target="#editTransactionModal" data-id="' . $transaction->id . '" class="btn btn-sm btn-info btn-edit-transaction">Edit</a>';
+                    $button .= '<a  href="/transaction/' . $transaction->id . '/edit" class="btn btn-sm btn-info">Edit</a>';
                     $button .= '<a href="javascript:void(0)" data-toggle="modal" data-target="#deleteTransactionModal" data-id="' . $transaction->id . '" class="btn btn-sm btn-danger btn-delete-transaction">Hapus</a>';
                     $button .= '</div>';
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'date_of_return', 'payment_status'])
                 ->make(true);
         }
         return view('transaction.index', compact('transaction'));
@@ -80,7 +97,8 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $data = $this->model->getModel()::with(['car', 'user'])->where('id', $id)->first();
-        return response()->json(['success' => true, 'data' => $data], 200);
+        $denda = is_null($data->date_of_return) ? 0 : dateDiffInDays($data->date_of_return, $data->return_date) * $data->car->fine;
+        return view('transaction.edit', compact('data', 'denda'));
     }
 
     /**
@@ -92,9 +110,15 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->only(['payment_status', 'date_of_return']);
+        $data = $request->only(['payment_status', 'return_date', 'lease_date']);
+        $transaction = Transaction::findOrFail($id);
         $this->model->update($data, $id);
-        return response()->json(['success' => true, 'data' => $data, 'messages' => 'Data berhasil diupdate'], 200);
+        if ($request->payment_status == 1) {
+            Car::findOrFail($transaction->car_id)->update([
+                'status' => 0
+            ]);
+        }
+        return redirect()->back();
     }
 
     /**
@@ -107,5 +131,13 @@ class TransactionController extends Controller
     {
         $this->model->delete($id);
         return response()->json(['success' => true, 'messages' => 'Data berhasil dihapus'], 200);
+    }
+
+    public function updatePengembalian(Request $request, $id)
+    {
+        Transaction::findOrFail($id)->update([
+            'date_of_return' => $request->date_of_return
+        ]);
+        return redirect()->back();
     }
 }

@@ -64,7 +64,7 @@ class TransactionController extends Controller
                     }
 
                     if ($transaction->payment_status == 0) {
-                        $button .= '<a  href="javascript:void(0)" data-toggle="modal" data-target="#editTransactionModal" data-id="' . $transaction->id . '" class="m-1 btn btn-sm btn-info btn-edit-transaction">Edit</a>';
+                        $button .= '<a  href="transaction/' . $transaction->id . '/edit"  class="m-1 btn btn-sm btn-info">Edit</a>';
                     } else {
                         $button .= '<a href="transaction/cetak-nota/' . $transaction->id . '" class="m-1 btn btn-sm btn-info">Cetak Nota</a>';
                     }
@@ -112,7 +112,7 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        $data = $this->model->getModel()::with('car')->first();
+        $data = $this->model->getModel()::where('id', $id)->first();
         $denda = dateDiffInDays(now(), $data->return_date) * $data->car->fine;
         $sewa = dateDiffInDays($data->return_date, $data->lease_date) * $data->car->price;
         return response()->json(['success' => true, 'html' => view('users.transaction.show', compact('data', 'denda', 'sewa'))->render()], 200);
@@ -126,7 +126,10 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->model->getModel()::where('id', $id)->first();
+        $denda = dateDiffInDays(now(), $data->return_date) * $data->car->fine;
+        $sewa = dateDiffInDays($data->return_date, $data->lease_date) * $data->car->price;
+        return view('users.transaction.edit', compact('data', 'sewa', 'denda'));
     }
 
     /**
@@ -138,7 +141,9 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payload = $request->only(['lease_date', 'return_date']);
+        $this->model->update($payload, $id);
+        return redirect()->back();
     }
 
     /**
@@ -201,6 +206,7 @@ class TransactionController extends Controller
         $denda = dateDiffInDays(now(), $data->return_date) * $data->car->fine;
         $sewa = dateDiffInDays($data->return_date, $data->lease_date) * $data->car->price;
         $pdf = PDF::loadview('users.transaction.cetak', ['data' => $data, 'denda' => $denda, 'sewa' => $sewa]);
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
 }

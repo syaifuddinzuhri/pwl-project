@@ -49,7 +49,7 @@
                                         @csrf
                                         <div class="form-group form-primary  ">
                                             <label for=" name">Nama Lengkap</label>
-                                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name')}}" required>
+                                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name')}}">
                                             <span class="form-bar"></span>
                                             @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -57,7 +57,7 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="no_ktp">Nomor KTP</label>
-                                            <input type="number" class="form-control" name="no_ktp" id="no_ktp" value="{{ old('no_ktp')}}" required>
+                                            <input type="number" class="form-control" name="no_ktp" id="no_ktp" value="{{ old('no_ktp')}}">
                                             <span class="form-bar"></span>
                                             @error('no_ktp')
                                             <span class="text-danger">{{ $message }}</span>
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="{{ old('email')}}" required>
+                                            <input type="email" class="form-control" name="email" id="email" value="{{ old('email')}}">
                                             <span class="form-bar"></span>
                                             @error('email')
                                             <span class="text-danger">{{ $message }}</span>
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="gender">Jenis Kelamin</label>
-                                            <select class="form-control" name="gender" id="gender" required>
+                                            <select class="form-control" name="gender" id="gender">
                                                 <option selected disabled></option>
                                                 <option value="lk">Laki-laki</option>
                                                 <option value="pr">Perempuan</option>
@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="phone">Nomor HP</label>
-                                            <input type="number" class="form-control" name="phone" id="phone" value="{{ old('phone')}}" required>
+                                            <input type="number" class="form-control" name="phone" id="phone" value="{{ old('phone')}}">
                                             <span class="form-bar"></span>
                                             @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="address">Alamat</label>
-                                            <textarea class="form-control" name="address" rows="3" id="address" required></textarea>
+                                            <textarea class="form-control" name="address" rows="3" id="address"></textarea>
                                             <span class="form-bar"></span>
                                             @error('address')
                                             <span class="text-danger">{{ $message }}</span>
@@ -101,16 +101,15 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            <input type="password" class="form-control" id="password" name="password">
                                             <span class="form-bar"></span>
                                             @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
-
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="password_confirmation">Konfirmasi Password</label>
-                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
+                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
                                             <span class="form-bar"></span>
                                             @error('password_confirmation')
                                             <span class="text-danger">{{ $message }}</span>
@@ -118,11 +117,10 @@
                                         </div>
                                         <div class="form-group form-primary ">
                                             <label for="role">Role</label>
-                                            <select class="form-control" name="role" id="role" required>
+                                            <select class="form-control" name="role" id="role">
                                                 <option selected disabled></option>
-                                                @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->name}}</option>
-                                                @endforeach
+                                                <option value="adm">Admin</option>
+                                                <option value="usr">Customer</option>
                                             </select>
                                             <span class="form-bar"></span>
                                             @error('role')
@@ -153,11 +151,11 @@
                                                 <th>#</th>
                                                 <th>No. KTP</th>
                                                 <th>Nama</th>
-                                                <th>Jenis Kelamin</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
+                                                <th>Jenis Kelamin</th>
                                                 <th>Nomor HP</th>
                                                 <th>Alamat</th>
-                                                <th>Role</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
